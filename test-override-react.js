@@ -95,7 +95,7 @@ define("jsx/course_wizard/CourseWizard", [
       componentWillReceiveProps: function (nextProps) {
         this.setState({
           showWizard: nextProps.showWizard
-        }, () => {
+        }, function() {
           $(this.refs.wizardBox.getDOMNode()).removeClass('ic-wizard-box--is-closed');
           if (this.state.showWizard) {
             this.refs.closeLink.getDOMNode().focus();
