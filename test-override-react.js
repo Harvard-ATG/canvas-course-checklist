@@ -2,6 +2,7 @@
 // So that we can redefine/customize them.
 delete require.s.contexts._.defined['jsx/course_wizard/ListItems'];
 delete require.s.contexts._.defined['jsx/course_wizard/Checklist'];
+delete require.s.contexts._.defined['jsx/course_wizard/CourseWizard'];
 
 define('jsx/course_wizard/ListItems', ['i18n!course_wizard'], function() { 
 	return [{
@@ -21,7 +22,6 @@ define('jsx/course_wizard/ListItems', ['i18n!course_wizard'], function() {
         }];
 });
 
-/*
 define('jsx/course_wizard/Checklist', ['react', './ChecklistItem', './ListItems'], function(e, a, s) {
 	var t = e.createClass({
 		displayName: "Checklist",
@@ -59,7 +59,110 @@ define('jsx/course_wizard/Checklist', ['react', './ChecklistItem', './ListItems'
 	});
 	return t;
 });
-*/
+
+define("jsx/course_wizard/CourseWizard", [
+  'jquery',
+  'react',
+  'i18n!course_wizard',
+  'react-modal',
+  './InfoFrame',
+  './Checklist',
+  'compiled/userSettings',
+  'compiled/jquery.rails_flash_notifications'
+], function($, React, I18n, ReactModal, InfoFrame, Checklist, userSettings) {
+
+  var CourseWizard = React.createClass({
+      displayName: 'CourseWizard',
+
+      propTypes: {
+        showWizard: React.PropTypes.bool,
+        overlayClassName: React.PropTypes.string
+      },
+
+      getInitialState: function () {
+        return {
+          showWizard: this.props.showWizard,
+          selectedItem: false
+        };
+      },
+
+      componentDidMount: function () {
+        this.refs.closeLink.getDOMNode().focus();
+        $(this.refs.wizardBox.getDOMNode()).removeClass('ic-wizard-box--is-closed');
+        $.screenReaderFlashMessageExclusive(I18n.t("Course Setup Wizard is showing."));
+      },
+
+      componentWillReceiveProps: function (nextProps) {
+        this.setState({
+          showWizard: nextProps.showWizard
+        }, () => {
+          $(this.refs.wizardBox.getDOMNode()).removeClass('ic-wizard-box--is-closed');
+          if (this.state.showWizard) {
+            this.refs.closeLink.getDOMNode().focus();
+          }
+        });
+      },
+
+      /**
+       * Handles what should happen when a checklist item is clicked.
+       */
+      checklistClickHandler: function (itemToShowKey) {
+        this.setState({
+          selectedItem: itemToShowKey
+        });
+      },
+
+      closeModal: function (event) {
+        if (event) {
+          event.preventDefault()
+        };
+
+        var pathname = window.location.pathname;
+        userSettings.set('hide_wizard_' + pathname, true);
+
+        this.setState({
+          showWizard: false
+        })
+      },
+
+      render: function () {
+          return (
+              React.createElement(ReactModal, {
+                isOpen: this.state.showWizard, 
+                onRequestClose: this.closeModal, 
+                overlayClassName: this.props.overlayClassName
+              }, 
+                React.createElement("div", {ref: "wizardBox", className: "ic-wizard-box"}, 
+                  React.createElement("div", {className: "ic-wizard-box__header"}, 
+                    React.createElement("a", {href: "/", className: "ic-wizard-box__logo-link"}, 
+                      React.createElement("span", {className: "screenreader-only"}, I18n.t("My dashboard"))
+                    ), 
+                    React.createElement(Checklist, {className: "ic-wizard-box__nav", 
+                               selectedItem: this.state.selectedItem, 
+                               clickHandler: this.checklistClickHandler}
+                    )
+                  ), 
+                  React.createElement("div", {className: "ic-wizard-box__main"}, 
+                    React.createElement("div", {className: "ic-wizard-box__close"}, 
+                      React.createElement("div", {className: "ic-Expand-link ic-Expand-link--Secondary ic-Expand-link--from-right"}, 
+                        React.createElement("a", {ref: "closeLink", href: "#", className: "ic-Expand-link__trigger", onClick: this.closeModal}, 
+                          React.createElement("div", {className: "ic-Expand-link__layout"}, 
+                            React.createElement("i", {className: "icon-x ic-Expand-link__icon"}), 
+                            React.createElement("span", {className: "ic-Expand-link__text"}, I18n.t("Close and return to Canvas"))
+                          )
+                        )
+                      )
+                    ), 
+                    React.createElement(InfoFrame, {className: "ic-wizard-box__content", itemToShow: this.state.selectedItem, closeModal: this.closeModal})
+                  )
+                )
+              )
+          );
+      }
+  });
+
+  return CourseWizard;
+});
 
 require(['jquery', 'react'], function($, React) {
     /*
