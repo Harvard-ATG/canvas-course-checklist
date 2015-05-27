@@ -78,9 +78,9 @@ define('jsx/course_wizard/ListItems', ['i18n!course_wizard'], function (I18n) {
       {
         key:'policy_wizard',
         complete: ENV.COURSE_WIZARD.checklist_states.publish_step,
-        title: I18n.t("Customize academic integrity policy"),
-        text: I18n.t("Customize the academic integrity policy for your course."),
-        url: "https://canvas.harvard.edu/courses/39/external_tools/1513",
+        title: "Customize academic integrity policy",
+        text: "Customize the academic integrity policy for your course.",
+        url: "/courses/39/external_tools/1513",
         iconClass: 'icon-educators'
 	  },
       {
