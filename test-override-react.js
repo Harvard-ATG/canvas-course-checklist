@@ -69,15 +69,15 @@ define('jsx/course_wizard/ListItems', ['i18n!course_wizard'], function (I18n) {
       {
         key:'add_tas',
         complete: ENV.COURSE_WIZARD.checklist_states.add_ta_step,
-        title: I18n.t("Add TFs to the Course"),
-        text: I18n.t("You may want to assign some TFs to help you with the course.  TFs can grade student submissions, help moderate the discussions and even update due dates and assignment details for you."),
+        title: "Add TFs to the Course",
+        text: "You may want to assign some TFs to help you with the course.  TFs can grade student submissions, help moderate the discussions and even update due dates and assignment details for you.",
         url: ENV.COURSE_WIZARD.urls.add_tas,
         iconClass: 'icon-educators'
       },
 // NOTE: Added item for customizing the academic integrity policy for the course
       {
         key:'policy_wizard',
-        complete: ENV.COURSE_WIZARD.checklist_states.publish_step,
+        complete: false,
         title: "Customize academic integrity policy",
         text: "Customize the academic integrity policy for your course.",
         url: "/courses/39/external_tools/1513",
