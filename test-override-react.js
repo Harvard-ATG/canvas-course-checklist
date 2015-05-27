@@ -4,7 +4,7 @@ delete require.s.contexts._.defined['jsx/course_wizard/ListItems'];
 delete require.s.contexts._.defined['jsx/course_wizard/Checklist'];
 delete require.s.contexts._.defined['jsx/course_wizard/CourseWizard'];
 
-define(['i18n!course_wizard'], function (I18n) {
+define('jsx/course_wizard/ListItems', ['i18n!course_wizard'], function (I18n) {
     /**
      * Returns an array containing all the possible items for the checklist
      */
