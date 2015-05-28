@@ -7,7 +7,7 @@ require(['jquery'], function($) {
 		updateWizard: function() {
 			console.log("Updating Wizard...");
 			this.remove('wizard_add_students');
-			this.replaceText("wizard_add_tas", /^TA(s?)/g, "TF$1");
+			this.replaceText("wizard_add_tas", /TA(s?)/g, "TF$1");
 		},
 		remove: function(id) {
 			$("#"+id).remove();
