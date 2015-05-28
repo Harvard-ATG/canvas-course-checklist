@@ -1,4 +1,4 @@
-require(['jquery'], function($) {
+//require(['jquery'], function($) {
 	var CustomizedWizard = {
 		onClick: function(e) {
 			console.log("Clicked Wizard", "event", e, "this", this);
@@ -8,4 +8,4 @@ require(['jquery'], function($) {
 	console.log("setting up jquery test...", CustomizeWizard);
 
 	$(".wizard_popup_link").on("click", CustomizedWizard.onClick);
-});
+//});
