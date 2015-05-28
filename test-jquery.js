@@ -7,7 +7,7 @@ require(['jquery'], function($) {
 		updateWizard: function() {
 			console.log("Updating Wizard...");
 			this.remove('wizard_add_students');
-			this.replaceText("wizard_add_tas", /^TA(s?)/, "TF$1");
+			this.replaceText("wizard_add_tas", /^TA(s?)/g, "TF$1");
 		},
 		remove: function(id) {
 			$("#"+id).remove();
@@ -30,6 +30,7 @@ require(['jquery'], function($) {
 			$el.find("*").contents().filter(function () { 
 				return this.nodeType === 3; 
 			}).each(function() {
+				console.log("replacing", $el, this);
 				this.nodeValue = this.nodeValue.replace(pattern, replacement);
 			});
 		},
