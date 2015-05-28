@@ -4,15 +4,17 @@ require(['jquery'], function($) {
 		// Event handler for when the "Setup Checklist" button is clicked
 		onClick: function(e) {
 			console.log("Clicked Wizard", "event", e, "this", this);
-
+			this.customize();
+		},
+		customize: function() {
 			this.removeItem('wizard_add_students');
 
 			this.updateItem({
 				id: "wizard_add_tas", 
 				text: "Add TFs to the Course", 
-				message: [
-					"You may want to assign some TAs to help you with the course. ",
-					"TAs can grade student submissions, help moderate the discussions ",
+				msg: [
+					"You may want to assign some TFs to help you with the course. ",
+					"TFs can grade student submissions, help moderate the discussions ",
 					"and even update due dates and assignment details for you."
 				].join(''),
 				btn: "Add TFs to the Course"
@@ -24,15 +26,16 @@ require(['jquery'], function($) {
 			$("#"+id).remove();
 		},
 		// Updates an item in the checklist 
-		updateItem: function(replacment) {
-			console.log("update", replacement);
-			var that = this;
-			var $el = $("#"+replacement.id);
-			$el.text(replacement.text);
+		updateItem: function(item) {
+			console.log("update", item);
+			var that = this, $el = $("#"+item.id);
+			$el.text(item.text);
 			$el.on("click", function(e) {
 				var $box = that.getMessageBoxEl();
-				$box.find('.ic-wizard-box__message-text').text(replacement.msg);
-				$box.find('.ic-wizard-box__message-button').text(replacement.btn);
+				console.log("clicked", e, $box, item.msg, item.btn);
+				$box.find('.ic-wizard-box__message-text').text(item.msg);
+				$box.find('.ic-wizard-box__message-button .Button').text(item.btn);
+				e.stopPropagation();
 			});
 		},
 		// Returns the message box container element
