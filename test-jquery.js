@@ -1,11 +1,21 @@
-//require(['jquery'], function($) {
-	var CustomizedWizard = {
+require(['jquery'], function($) {
+	var Customize = {
 		onClick: function(e) {
 			console.log("Clicked Wizard", "event", e, "this", this);
+			this.updateWizard();
+		},
+		updateWizard: function() {
+			console.log("Updating Wizard...");
+			//this.remove('wizard_add_students');
+		},
+		remove: function(id) {
+			$(id).remove();
 		}
 	};
 
-	console.log("setting up jquery test...", CustomizedWizard);
+	Customize.onClick = $.proxy(Customize.onClick, Customize);
 
-	$(".wizard_popup_link").on("click", CustomizedWizard.onClick);
-//});
+	console.log("setting up jquery test...", Customize);
+
+	$(".wizard_popup_link").on("click", Customize.onClick);
+});
