@@ -5,7 +5,7 @@
 		}
 	};
 
-	console.log("setting up jquery test...", CustomizeWizard);
+	console.log("setting up jquery test...", CustomizedWizard);
 
 	$(".wizard_popup_link").on("click", CustomizedWizard.onClick);
 //});
