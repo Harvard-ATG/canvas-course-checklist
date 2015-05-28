@@ -5,5 +5,7 @@ require(['jquery'], function($) {
 		};
 	};
 
+	console.log("setting up jquery test...", CustomizeWizard);
+
 	$(".wizard_popup_link").on("click", CustomizedWizard.onClick);
 });
