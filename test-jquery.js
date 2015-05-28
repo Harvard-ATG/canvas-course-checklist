@@ -16,18 +16,21 @@ require(['jquery'], function($) {
 			var $itemEl = $("#"+id); 
 			var $boxEl = this.getMessageBoxEl();
 			var that = this;
+			console.log("replaceText", id, pattern, replacement);
 
 			// Replace text on the checklist 
 			that._replaceText($itemEl, pattern, replacement);
 
 			// When the checklist item is clicked, replace text in the message box
 			$itemEl.on("click", function(e) {
+				console.log("clicked", e, $boxEl);
 				that._replaceText($boxEl, pattern, replacement);
 			});
 		},
 		_replaceText: function($el, pattern, replacement) {
 			// Replace all descendant text node values
 			$el.find("*").contents().filter(function () { 
+				console.log("filtering", this.nodeType);
 				return this.nodeType === 3; 
 			}).each(function() {
 				console.log("replacing", $el, this);
