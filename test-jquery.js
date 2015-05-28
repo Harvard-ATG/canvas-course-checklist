@@ -1,50 +1,50 @@
 require(['jquery'], function($) {
+
 	var Customize = {
+		// Event handler for when the "Setup Checklist" button is clicked
 		onClick: function(e) {
 			console.log("Clicked Wizard", "event", e, "this", this);
-			this.updateWizard();
+
+			this.removeItem('wizard_add_students');
+
+			this.updateItem({
+				id: "wizard_add_tas", 
+				text: "Add TFs to the Course", 
+				message: [
+					"You may want to assign some TAs to help you with the course. ",
+					"TAs can grade student submissions, help moderate the discussions ",
+					"and even update due dates and assignment details for you."
+				].join(''),
+				btn: "Add TFs to the Course"
+			});
 		},
-		updateWizard: function() {
-			console.log("Updating Wizard...");
-			this.remove('wizard_add_students');
-			this.replaceText("wizard_add_tas", /TA(s?)/g, "TF$1");
-		},
-		remove: function(id) {
+		// Removes an item from the checklist
+		removeItem: function(id) {
+			console.log("remove", id);
 			$("#"+id).remove();
 		},
-		replaceText: function(id, pattern, replacement) {
-			var $itemEl = $("#"+id); 
-			var $boxEl = this.getMessageBoxEl();
+		// Updates an item in the checklist 
+		updateItem: function(replacment) {
+			console.log("update", replacement);
 			var that = this;
-			console.log("replaceText", id, pattern, replacement);
-
-			// Replace text on the checklist 
-			that._replaceText($itemEl, pattern, replacement);
-
-			// When the checklist item is clicked, replace text in the message box
-			$itemEl.on("click", function(e) {
-				console.log("clicked", e, $boxEl);
-				that._replaceText($boxEl, pattern, replacement);
+			var $el = $("#"+replacement.id);
+			$el.text(replacement.text);
+			$el.on("click", function(e) {
+				var $box = that.getMessageBoxEl();
+				$box.find('.ic-wizard-box__message-text').text(replacement.msg);
+				$box.find('.ic-wizard-box__message-button').text(replacement.btn);
 			});
 		},
-		_replaceText: function($el, pattern, replacement) {
-			// Replace all descendant text node values
-			$el.find("*").contents().filter(function () { 
-				console.log("filtering", this.nodeType);
-				return this.nodeType === 3; 
-			}).each(function() {
-				console.log("replacing", $el, this);
-				this.nodeValue = this.nodeValue.replace(pattern, replacement);
-			});
-		},
+		// Returns the message box container element
 		getMessageBoxEl: function() {
 			return $(".CourseWizard__modalOverlay .ic-wizard-box__message");
 		}
 	};
 
+	// Bind the context of the event handler to the object it is attached to
 	Customize.onClick = $.proxy(Customize.onClick, Customize);
 
+	// Attach our customizations to the wizard button
 	console.log("setting up jquery test...", Customize);
-
 	$(".wizard_popup_link").on("click", Customize.onClick);
 });
