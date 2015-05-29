@@ -1,11 +1,8 @@
 require([
 	'jquery',
-	'react',
 	'jsx/course_wizard/ListItems',
-	'jsx/course_wizard/ChecklistItem',
-	'jsx/course_wizard/CourseWizard'
-], function($, React, ListItems, ChecklistItem, CourseWizard) {
-	
+], function($, ListItems) {
+
 	/**
 	 * The CourseWizard (i.e. Setup Checklist) is a javascript component built using ReactJS.
 	 * If you're not familiar with React, it uses a syntax extension called JSX, which is compiled
@@ -20,23 +17,8 @@ require([
 	 * 3) https://github.com/instructure/canvas-lms/blob/master/app/jsx/course_wizard/CourseWizard.jsx
 	 * 4) https://github.com/instructure/canvas-lms/blob/master/app/controllers/courses_controller.rb
      *
-	 * In order to customize the CourseWizard, we need to unmount the component and disable the existing
-	 * event handler on the "Setup Checklist" button. Then, we need to pull in the React components,
-	 * customize the ListItems and override the method that renders those items, and then re-initialize
-	 * the button that renders the top-level CourseWizard React component.
-	 *
-	 * You might be wondering why all of this is necessary. Why not just write some jQuery code to
-	 * grab the DOM elements and change them at will? The reason is: React. React expects to completely
-	 * manage the DOM under the root node, and has a sophisticated algorithm for changing the DOM when
-	 * there are state changes (it maintains its own shadow DOM and performs a diff to know what to
-	 * change and when to change it). This makes it rather complicated to change things out from under
-	 * React, and expect the React component to still work as intended. Efforts to do so only partially
-	 * worked. So while this approach seems more complicated than it needs to be, it is in fact a "safer"
-	 * approach since we can be sure the React component is working properly.
-	 *
-	 * The bottom line is that Instructure has not made this component very flexible or open to
-	 * modification, so at present, it's the best we can do, assuming we don't want to completely
-	 * disable their version of the CourseWizard and write our own from scratch.
+	 * To customize the list of items that appear in the CourseWizard, we can simply load the ListItems
+	 * module that defines the items that are rendered, and then modify that directly. 
 	 */
 
 	var CustomizedListItems = (function(items) {
@@ -51,65 +33,18 @@ require([
 		});
 		
 		// INSERT: Academic Integrity Policy
+		// TODO: Figure out how to get the correct URL for the course's policy wizard tool.
 		items.splice(7, 0, {
 			key:'policy_wizard',
 			complete: false,
 			title: "Customize academic integrity policy",
 			text: "Customize the academic integrity policy for your course.",
-			url: "/courses/39/external_tools/1513",
+			url: "/courses/:course_id/external_tools/:tool_id",
 			iconClass: 'icon-educators'
 		});
 
 		return items;
-	})(ListItems); 
-
-/*
-	var $popup_link = $(".wizard_popup_link");
-	var $wizard_box = $("#wizard_box");
-	var courseWizardFactory = React.createFactory(CourseWizard);
-
-	React.unmountComponentAtNode($wizard_box[0]);
-
-	$popup_link.off("click");
-
-	$popup_link.on("click", function(event) {
-		var component = React.render(courseWizardFactory({
-			overlayClassName: 'CourseWizard__modalOverlay',
-			showWizard: true
-		}), $wizard_box[0]);
-
-		var checklist_component = component.refs.wizardBox.props.children[0].props.children[1];
-		
-		var saved_render = checklist_component.render;
-		
-		checklist_component.render = function() {
-			console.log("render called for checklist component");
-			return saved_render.apply(this, arguments);
-		};
-		
-		checklist_component.renderCheckList = function() {
-			console.log("render checklist", this, CustomizedListItems);
-			var result = CustomizedListItems.map(function(item) {
-				console.log("mapped", item.title, item.id);
-				var isSelected = (this.state.selectedItem === item.key);
-				var id = "wizard_" + item.key;
-				return ChecklistItem({
-					complete: item.complete,
-					id: id,
-					key: item.key,
-					stepKey: item.key,
-					title: item.title,
-					onClick: this.props.clickHandler,
-					isSelected: isSelected
-				})
-			}.bind(this))
-			
-			console.log("result", result);
-
-			return result;
-		};
-
-		//checklist_component.render();
-	});
-*/
+	})(ListItems);
+	
+	// console.log("Customized Checklist: ", CustomizedListItems);
 });
