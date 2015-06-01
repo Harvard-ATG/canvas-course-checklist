@@ -84,8 +84,8 @@ require([
 	if(DEBUG) {
 		$.getJSON("/api/v1/accounts/39/external_tools").done(function(data) {
 			console.log("List of tools for account_id 39:");
-			$.each(data, function(d) { 
-				console.log("tool consumer key:", d.consumer_key, "tool id:", d.id);
+			$.each(data, function(idx, tool) { 
+				console.log("tool consumer key:", tool.consumer_key, "tool id:", tool.id);
 			})
 		});
 		console.log("customized setup checklist: ", ListItems);
