@@ -85,7 +85,8 @@ require([
 	
 	//----- CHANGE #4 -----
 	// Modify background image.
-	$(document).ready(function() { 
+	$(document).ready(function() {
+		console.log($(".wizard_popup_link"));
 		if (BACKGROUND_IMG_URL) {
 			$(".wizard_popup_link").on("click", function(e) {
 				console.log("set background image", BACKGROUND_IMG_URL);
@@ -94,6 +95,8 @@ require([
 					"background-size": "100% auto"
 				});
 				e.stopPropagation();
+				e.preventDefault();
+				return false;
 			});
 		}
 	});
