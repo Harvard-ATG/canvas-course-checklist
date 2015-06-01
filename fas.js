@@ -84,17 +84,27 @@ require([
 	});
 	
 	//----- CHANGE #4 -----
-	// Modify background image
-	if (BACKGROUND_IMG_URL) {
-		$(document).ready(function() { 
-			$(".wizard_popup_link").on("click", function(e) {
-				$(".ic-wizard-box").css({
-					"background": 'url("'+BACKGROUND_IMG_URL+'") no-repeat center center',
-					"background-size": "100% auto"
+	// Modify background image.
+	// Note: the code below is attempting to work around the fact that this script is
+	// included *before* course_wizard.js, but we want our click event handler
+	// to be called *last*. 
+	var callback_name = "customize_course_wizard_" + $.now();
+	window[callback_name] = function() {
+		if (BACKGROUND_IMG_URL) {
+			$(document).ready(function() {
+				$(".wizard_popup_link").on("click", function(e) {
+					$(".ic-wizard-box").css({
+						"background": 'url("'+BACKGROUND_IMG_URL+'") no-repeat center center',
+						"background-size": "100% auto"
+					});
 				});
 			});
-		});
-	}
+		}
+	};
+	var script = document.createElement("script");
+	script.setAttribute("type", "text/javascript");
+	script.appendChild(document.createTextNode("window."+callback_name +"();"));
+	document.body.appendChild(script);
 
 	//----- DEBUG -----
 	if(DEBUG) {
