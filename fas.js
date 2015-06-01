@@ -20,31 +20,30 @@ require([
 	 * To customize the list of items that appear in the CourseWizard, we can simply load the ListItems
 	 * module that defines the items that are rendered, and then modify that directly. 
 	 */
+	var ITEMS = ListItems;
+	var POLICY_WIZARD_TOOL_ID = 1509;
+	var POLICY_WIZARD_TOOL_URL = window.location.pathname + "/external_tools/" + POLICY_WIZARD_TOOL_ID;
 
-	var CustomizedListItems = (function(items) {
-
-		// REMOVE: Add Students (third item -- at index 2 in the array)
-		items.splice(2, 1);
-		
-		// CHANGE: TA => TF in title and text
-		$.each(['text', 'title'], function(idx, prop) {
-			var wizard_add_tas = items[6];
-			wizard_add_tas[prop] = wizard_add_tas[prop].replace(/TA(s)?/g, "TF$1");
-		});
-		
-		// INSERT: Academic Integrity Policy
-		// TODO: Figure out how to get the correct URL for the course's policy wizard tool.
-		items.splice(7, 0, {
-			key:'policy_wizard',
-			complete: false,
-			title: "Customize academic integrity policy",
-			text: "Customize the academic integrity policy for your course.",
-			url: "/courses/:course_id/external_tools/:tool_id",
-			iconClass: 'icon-educators'
-		});
-
-		return items;
-	})(ListItems);
+	// REMOVE: Add Students (third item -- at index 2 in the array)
+	ITEMS.splice(2, 1);
 	
-	// console.log("Customized Checklist: ", CustomizedListItems);
+	// CHANGE: TA => TF in title and text
+	$.each(['text', 'title'], function(idx, prop) {
+		var add_tas = ITEMS[6];
+		add_tas[prop] = add_tas[prop].replace(/TA(s)?/g, "TF$1");
+	});
+	
+	// INSERT: Academic Integrity Policy
+	// TODO: Figure out how to get the correct URL for the course's policy wizard tool.
+	ITEMS.splice(7, 0, {
+		key:'policy_wizard',
+		complete: false,
+		title: "Customize academic integrity policy",
+		text: "Customize the academic integrity policy for your course.",
+		//url: "/courses/:course_id/external_tools/:tool_id",
+		url: POLICY_WIZARD_TOOL_URL,
+		iconClass: 'icon-educators'
+	});
+
+	console.log("Customized Setup Checklist: ", ListItems);
 });
