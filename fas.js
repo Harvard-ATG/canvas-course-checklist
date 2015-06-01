@@ -86,7 +86,13 @@ require([
 	//----- CHANGE #4 -----
 	// Modify background image.
 	if (BACKGROUND_IMG_URL) {
-		$("head").append('<style>.ic-wizard-box { background: url("'+BACKGROUND_IMG_URL+'") no-repeat center center !important; background-size: 100% auto;</style>');
+		$("head").append([
+			'<style>',
+			'.ic-wizard-box {',
+				'background: url("'+BACKGROUND_IMG_URL+'") no-repeat center center !important;',
+				'background-size: 100% auto !important;',
+			'</style>'
+		].join(''));
 	}
 
 	//----- DEBUG -----
