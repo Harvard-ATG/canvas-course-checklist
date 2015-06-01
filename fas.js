@@ -47,7 +47,7 @@ require([
 	 */
 
 	var BASE_COURSE_URL = window.location.pathname; // i.e. /courses/12345
-	var POLICY_WIZARD_TOOL_ID = 1513; // Tool ID for account_id=39 
+	var POLICY_WIZARD_TOOL_ID = 1509; // Tool ID for account_id=39 
 	var MANAGE_PEOPLE_TOOL_ID = 3958; // Tool ID for account_id=39
 
 	//----- CHANGE #1 -----
