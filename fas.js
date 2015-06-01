@@ -24,7 +24,7 @@ require([
 	 * 2) https://github.com/instructure/canvas-lms/blob/master/app/jsx/course_wizard/ChecklistItem.jsx
 	 * 3) https://github.com/instructure/canvas-lms/blob/master/app/jsx/course_wizard/CourseWizard.jsx
 	 * 4) https://github.com/instructure/canvas-lms/blob/master/app/controllers/courses_controller.rb
-     *
+	 *
 	 * To customize the list of items that appear in the CourseWizard, we load the ListItems
 	 * module and then modify the desired items. ListItems is a reference to an array of objects,
 	 * and CourseWizard uses this same reference at render time, so any changes we make here are
