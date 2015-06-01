@@ -34,7 +34,7 @@ require([
 	 * 
 	 * 1. Change text of "Import Content" to be more iSites-specific.
 	 * 2. Remove "Add Students" from the checklist.
-	 * 3. Change "Add TAs" nomenclature and link to the "Manage People" tool.
+	 * 3. Change "Add TAs" nomenclature, link to the "Manage People" tool, and move up the list.
 	 * 4. Insert item for the "Academic Integrity Policy" tool.
 	 *
 	 * NOTES:
@@ -58,16 +58,18 @@ require([
 	var MANAGE_PEOPLE_TOOL_ID = 3958; // Tool ID for account_id=39
 
 	//----- CHANGE #1 -----
-	// REMOVE: Add Students item
+	// REMOVE: "Add Students" item
 	ListItems.splice(2, 1);
 	
 	//----- CHANGE #2 -----
-	// CHANGE: Add TAs item
-	var add_tas = ListItems[6];
+	// CHANGE: "Add TAs" item text and move up near the top of the list
+	var add_tas = ListItems.splice(6, 1)[0];
+	ListItems.splice(1, 0, add_tas);
 	$.each(['text', 'title'], function(idx, prop) {
 		add_tas[prop] = add_tas[prop].replace(/TA(s)?/g, "TF$1");
 	});
 	add_tas.url = BASE_COURSE_URL + "/external_tools/" + MANAGE_PEOPLE_TOOL_ID;
+	
 
 	//----- CHANGE #3 -----
 	// INSERT: Academic Integrity Policy tool
