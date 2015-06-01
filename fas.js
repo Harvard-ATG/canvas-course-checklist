@@ -44,8 +44,15 @@ require([
 	 * using the Canvas API. Ideally, these would be provided to the JS as environment
 	 * variables, but since we don't have the ability to modify the server-side controller,
 	 * that's not an option.
+	 *
+	 * Here's an easy way to get the list of external tools if you know the account ID. Just
+	 * run this code on the course home page, and then inspect the objects to find the "id"
+	 * of the tool you want:
+	 * 
+	 * $.getJSON("/api/v1/accounts/39/external_tools", $.proxy(console.log, console));
+	 * 
 	 */
-
+	var DEBUG = true;
 	var BASE_COURSE_URL = window.location.pathname; // i.e. /courses/12345
 	var POLICY_WIZARD_TOOL_ID = 1509; // Tool ID for account_id=39 
 	var MANAGE_PEOPLE_TOOL_ID = 3958; // Tool ID for account_id=39
@@ -73,5 +80,15 @@ require([
 		iconClass: 'icon-educators'
 	});
 
-	console.log("Customized Setup Checklist: ", ListItems);
+	//----- DEBUG -----
+	if(DEBUG) {
+		$.getJSON("/api/v1/accounts/39/external_tools").done(function(data) {
+			console.log("List of tools for account_id 39:");
+			$.each(data, function(d) { 
+				console.log("tool consumer key:", d.consumer_key, "tool id:", d.id);
+			})
+		});
+		console.log("customized setup checklist: ", ListItems);
+	}
+
 });
