@@ -56,7 +56,7 @@ require([
 	var BASE_COURSE_URL = window.location.pathname; // i.e. /courses/12345
 	var POLICY_WIZARD_TOOL_ID = 1509; // Tool ID for account_id=39 
 	var MANAGE_PEOPLE_TOOL_ID = 3958; // Tool ID for account_id=39
-	var BACKGROUND_IMG_URL = "//hpac.harvard.edu/files/hpac/files/022210_stock_jc_047_124407_978454_1.jpg";
+	var BACKGROUND_IMG_URL = "//hpac.harvard.edu/files/hpac/files/022210_stock_jc_047_124407_978454_1.jpg"; // Source: http://hpac.harvard.edu/pages/photos
 
 	//----- CHANGE #1 -----
 	// REMOVE: "Add Students" item
