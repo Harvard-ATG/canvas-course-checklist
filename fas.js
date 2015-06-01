@@ -89,21 +89,23 @@ require([
 	// included *before* course_wizard.js in the HTML document (therefore executed first),
 	// but we want our click event handler to be called *last*, so that we can override
 	// the existing styles.
-	var callback_name = "customize_course_wizard_" + $.now();
-	window[callback_name] = function() {
-		if (BACKGROUND_IMG_URL) {
-			$(".wizard_popup_link").on("click", function(e) {
-				$(".ic-wizard-box").css({
-					"background": 'url("'+BACKGROUND_IMG_URL+'") no-repeat center center',
-					"background-size": "100% auto"
+	$(document).ready(function() { 
+		var callback_name = "customize_course_wizard_" + $.now();
+		window[callback_name] = function() {
+			if (BACKGROUND_IMG_URL) {
+				$(".wizard_popup_link").on("click", function(e) {
+					$(".ic-wizard-box").css({
+						"background": 'url("'+BACKGROUND_IMG_URL+'") no-repeat center center',
+						"background-size": "100% auto"
+					});
 				});
-			});
-		}
-	};
-	var customize_script = document.createElement("script");
-	customize_script.setAttribute("type", "text/javascript");
-	customize_script.appendChild(document.createTextNode("window."+callback_name +"();"));
-	document.body.appendChild(customize_script);
+			}
+		};
+		var script = document.createElement("script");
+		script.setAttribute("type", "text/javascript");
+		script.appendChild(document.createTextNode(callback_name +"();"));
+		document.body.appendChild(script);
+	});
 
 	//----- DEBUG -----
 	if(DEBUG) {
