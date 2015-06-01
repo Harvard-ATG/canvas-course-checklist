@@ -85,16 +85,9 @@ require([
 	
 	//----- CHANGE #4 -----
 	// Modify background image.
-	$(document).ready(function() {
-		if (BACKGROUND_IMG_URL) {
-			$(".wizard_popup_link").on("click", function(e) {
-				$(".ic-wizard-box").css({
-					"background": 'url("'+BACKGROUND_IMG_URL+'") no-repeat center center',
-					"background-size": "100% auto"
-				});
-			});
-		}
-	});
+	if (BACKGROUND_IMG_URL) {
+		$("head").append('<style>.ic-wizard-box { background: url("'+BACKGROUND_IMG_URL+'") no-repeat center center !important; background-size: 100% auto;</style>');
+	}
 
 	//----- DEBUG -----
 	if(DEBUG) {
