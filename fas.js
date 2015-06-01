@@ -85,13 +85,10 @@ require([
 	
 	//----- CHANGE #4 -----
 	// Modify background image.
-	// NOTE: the code below is attempting to work around the fact that this script is
-	// included *before* course_wizard.js in the HTML document (therefore executed first),
-	// but we want our click event handler to be called *last*, so that we can override
-	// the existing styles.
 	$(document).ready(function() { 
 		if (BACKGROUND_IMG_URL) {
 			$(".wizard_popup_link").on("click", function(e) {
+				console.log("set background image", BACKGROUND_IMG_URL);
 				$(".ic-wizard-box").css({
 					"background": 'url("'+BACKGROUND_IMG_URL+'") no-repeat center center',
 					"background-size": "100% auto"
