@@ -93,6 +93,7 @@ require([
 					"background": 'url("'+BACKGROUND_IMG_URL+'") no-repeat center center',
 					"background-size": "100% auto"
 				});
+				e.stopPropagation();
 			});
 		}
 	});
