@@ -87,8 +87,9 @@ require([
 	// Modify background image
 	if (BACKGROUND_IMG_URL) {
 		$(".wizard_popup_link").on("click", function(e) {
+			console.log("setting background image:" , BACKGROUND_IMG_URL);
 			$(".ic-wizard-box").css({
-				"background": "url("+BACKGROUND_IMG_URL+") no-repeat center center",
+				"background": "url(\""+BACKGROUND_IMG_URL+"\") no-repeat center center",
 				"background-size": "100% auto"
 			});
 		});
