@@ -4,10 +4,10 @@ require([
 ], function($, ListItems) {
 
 	/**
-	 * The CourseWizard (i.e. Setup Checklist) is a javascript component built using ReactJS.
-	 * If you're not familiar with React, it uses a syntax extension called JSX, which is compiled
-	 * down to JS on the server. The CourseWizard is composed of several sub-components, each of
-	 * which is contained in a separate JSX file.
+	 * The CourseWizard (i.e. Setup Checklist) is a javascript component built using ReactJS,
+	 * which uses a syntax extension called JSX, which is compiled down to JS on the server.
+	 * The CourseWizard is composed of several sub-components, each of which is contained in
+	 * a separate JSX file.
 	 *
 	 * The JSX files are passed environment values from the Courses Controller, which are set in the
 	 * global ENV namespace. Refer to the source files below:
@@ -18,7 +18,13 @@ require([
 	 * 4) https://github.com/instructure/canvas-lms/blob/master/app/controllers/courses_controller.rb
      *
 	 * To customize the list of items that appear in the CourseWizard, we can simply load the ListItems
-	 * module that defines the items that are rendered, and then modify that directly. 
+	 * module that defines the items that are rendered, and then modify that directly.
+	 *
+	 * The Academic Integrity Tool (i.e. "Policy Wizard") is an LTI tool developed by ATG that
+	 * allows instructors to select or create a collaboration policy for their course. This tool
+	 * is installed at the account level so that it's available for all courses. In the "Harvard College/GSAS"
+	 * account (account_id = 39), this tool has tool_id = 1509. We've hard-coded this tool ID here
+	 * because it would be too cumbersome to obtain it dynamically using the API.
 	 */
 	var ITEMS = ListItems;
 	var POLICY_WIZARD_TOOL_ID = 1509;
@@ -45,5 +51,5 @@ require([
 		iconClass: 'icon-educators'
 	});
 
-	console.log("Customized Setup Checklist: ", ListItems);
+	//console.log("Customized Setup Checklist: ", ListItems);
 });
