@@ -4,52 +4,74 @@ require([
 ], function($, ListItems) {
 
 	/**
-	 * The CourseWizard (i.e. Setup Checklist) is a javascript component built using ReactJS,
-	 * which uses a syntax extension called JSX, which is compiled down to JS on the server.
-	 * The CourseWizard is composed of several sub-components, each of which is contained in
-	 * a separate JSX file.
+	 * SYNOPSIS:
 	 *
-	 * The JSX files are passed environment values from the Courses Controller, which are set in the
-	 * global ENV namespace. Refer to the source files below:
+	 * This module modifies the checklist items that populate the "Setup Checklist" for
+	 * course instructors.
+	 *
+	 * DESCRIPTION:
+	 *
+	 * The "Setup Checklist", or CourseWizard, as it is called in Canvas, is a component built
+	 * using ReactJS and a syntax extension called JSX. The CourseWizard is composed of several
+	 * sub-components, each of which is contained in a separate JSX file, which compiles down
+	 * to native JS (the compilation step happens on the server).
+	 *
+	 * The components are passed environment values from the Courses Controller, and these values
+	 * are accessed in the global ENV namespace. To better understand how the CourseWizard works,
+	 * refer to these source files:
 	 * 
 	 * 1) https://github.com/instructure/canvas-lms/blob/master/app/jsx/course_wizard/ListItems.jsx
 	 * 2) https://github.com/instructure/canvas-lms/blob/master/app/jsx/course_wizard/ChecklistItem.jsx
 	 * 3) https://github.com/instructure/canvas-lms/blob/master/app/jsx/course_wizard/CourseWizard.jsx
 	 * 4) https://github.com/instructure/canvas-lms/blob/master/app/controllers/courses_controller.rb
      *
-	 * To customize the list of items that appear in the CourseWizard, we can simply load the ListItems
-	 * module that defines the items that are rendered, and then modify that directly.
+	 * To customize the list of items that appear in the CourseWizard, we load the ListItems
+	 * module and then modify the desired items. ListItems is a reference to an array of objects,
+	 * and CourseWizard uses this same reference at render time, so any changes we make here are
+	 * visible to the CourseWizard component.
 	 *
-	 * The Academic Integrity Tool (i.e. "Policy Wizard") is an LTI tool developed by ATG that
-	 * allows instructors to select or create a collaboration policy for their course. This tool
-	 * is installed at the account level so that it's available for all courses. In the "Harvard College/GSAS"
-	 * account (account_id = 39), this tool has tool_id = 1509. We've hard-coded this tool ID here
-	 * because it would be too cumbersome to obtain it dynamically using the API.
+	 * CHANGE LIST:
+	 * 
+	 * 1. Change text of "Import Content" to be more iSites-specific.
+	 * 2. Remove "Add Students" from the checklist.
+	 * 3. Change "Add TAs" nomenclature and link to the "Manage People" tool.
+	 * 4. Insert item for the "Academic Integrity Policy" tool.
+	 *
+	 * NOTES:
+	 *
+	 * The external tool links have the tool ID hard coded for the "Harvard College/GSAS"
+	 * account (account_id=39), since it would be too cumbersome to obtain the tool ID
+	 * using the Canvas API. Ideally, these would be provided to the JS as environment
+	 * variables, but since we don't have the ability to modify the server-side controller,
+	 * that's not an option.
 	 */
-	var ITEMS = ListItems;
-	var POLICY_WIZARD_TOOL_ID = 1509;
-	var POLICY_WIZARD_TOOL_URL = window.location.pathname + "/external_tools/" + POLICY_WIZARD_TOOL_ID;
 
-	// REMOVE: Add Students (third item -- at index 2 in the array)
-	ITEMS.splice(2, 1);
+	var BASE_COURSE_URL = window.location.pathname; // i.e. /courses/12345
+	var POLICY_WIZARD_TOOL_ID = 1513; // Tool ID for account_id=39 
+	var MANAGE_PEOPLE_TOOL_ID = 3958; // Tool ID for account_id=39
+
+	//----- CHANGE #1 -----
+	// REMOVE: Add Students item
+	ListItems.splice(2, 1);
 	
-	// CHANGE: TA => TF in title and text
+	//----- CHANGE #2 -----
+	// CHANGE: Add TAs item
+	var add_tas = ListItems[6];
 	$.each(['text', 'title'], function(idx, prop) {
-		var add_tas = ITEMS[6];
 		add_tas[prop] = add_tas[prop].replace(/TA(s)?/g, "TF$1");
 	});
-	
-	// INSERT: Academic Integrity Policy
-	// TODO: Figure out how to get the correct URL for the course's policy wizard tool.
-	ITEMS.splice(7, 0, {
+	add_tas.url = BASE_COURSE_URL + "/external_tools/" + MANAGE_PEOPLE_TOOL_ID;
+
+	//----- CHANGE #3 -----
+	// INSERT: Academic Integrity Policy tool
+	ListItems.splice(7, 0, {
 		key:'policy_wizard',
 		complete: false,
 		title: "Customize academic integrity policy",
 		text: "Customize the academic integrity policy for your course.",
-		//url: "/courses/:course_id/external_tools/:tool_id",
-		url: POLICY_WIZARD_TOOL_URL,
+		url: BASE_COURSE_URL + "/external_tools/" + POLICY_WIZARD_TOOL_ID,
 		iconClass: 'icon-educators'
 	});
 
-	//console.log("Customized Setup Checklist: ", ListItems);
+	console.log("Customized Setup Checklist: ", ListItems);
 });
