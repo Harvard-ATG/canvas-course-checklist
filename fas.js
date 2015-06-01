@@ -86,17 +86,12 @@ require([
 	//----- CHANGE #4 -----
 	// Modify background image.
 	$(document).ready(function() {
-		console.log($(".wizard_popup_link"));
 		if (BACKGROUND_IMG_URL) {
 			$(".wizard_popup_link").on("click", function(e) {
-				console.log("set background image", BACKGROUND_IMG_URL);
 				$(".ic-wizard-box").css({
 					"background": 'url("'+BACKGROUND_IMG_URL+'") no-repeat center center',
 					"background-size": "100% auto"
 				});
-				e.stopPropagation();
-				e.preventDefault();
-				return false;
 			});
 		}
 	});
