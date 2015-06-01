@@ -86,10 +86,12 @@ require([
 	//----- CHANGE #4 -----
 	// Modify background image
 	if (BACKGROUND_IMG_URL) {
-		$(".wizard_popup_link").on("click", function(e) {
-			$(".ic-wizard-box").css({
-				"background": 'url("'+BACKGROUND_IMG_URL+'") no-repeat center center',
-				"background-size": "100% auto"
+		$(document).ready(function() { 
+			$(".wizard_popup_link").on("click", function(e) {
+				$(".ic-wizard-box").css({
+					"background": 'url("'+BACKGROUND_IMG_URL+'") no-repeat center center',
+					"background-size": "100% auto"
+				});
 			});
 		});
 	}
