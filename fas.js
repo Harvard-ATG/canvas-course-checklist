@@ -1,7 +1,4 @@
-require([
-	'jquery',
-	'jsx/course_wizard/ListItems',
-], function($, ListItems) {
+require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
 
 	/**
 	 * SYNOPSIS:
@@ -101,7 +98,7 @@ require([
 			console.log("List of tools for account_id 39:");
 			$.each(data, function(idx, tool) { 
 				console.log("tool consumer key:", tool.consumer_key, "tool id:", tool.id);
-			})
+			});
 		});
 		console.log("customized setup checklist: ", ListItems);
 	}
