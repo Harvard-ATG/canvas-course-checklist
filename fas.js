@@ -30,33 +30,33 @@ require([
 	 * and CourseWizard uses this same reference at render time, so any changes we make here are
 	 * visible to the CourseWizard component.
 	 *
-	 * CHANGE LIST:
-	 * 
-	 * 1. Change text of "Import Content" to be more iSites-specific.
-	 * 2. Remove "Add Students" from the checklist.
-	 * 3. Change "Add TAs" nomenclature, link to the "Manage People" tool, and move up the list.
-	 * 4. Insert item for the "Academic Integrity Policy" tool.
-	 *
-	 * NOTES:
-	 *
-	 * The external tool links have the tool ID hard coded for the "Harvard College/GSAS"
+	 * Note that the external tool links have the tool ID hard coded for the "Harvard College/GSAS"
 	 * account (account_id=39), since it would be too cumbersome to obtain the tool ID
 	 * using the Canvas API. Ideally, these would be provided to the JS as environment
 	 * variables, but since we don't have the ability to modify the server-side controller,
 	 * that's not an option.
 	 *
 	 * Here's an easy way to get the list of external tools if you know the account ID. Just
-	 * run this code on the course home page, and then inspect the objects to find the "id"
+	 * run this code from the course home page, and then inspect the objects to find the "id"
 	 * of the tool you want:
 	 * 
 	 * $.getJSON("/api/v1/accounts/39/external_tools", $.proxy(console.log, console));
+	 *
+	 * TECHNICAL RISKS:
+	 *
+	 * 1) Instructure does not support this kind of modification to the checklist, and Instructure
+	 * could release a breaking change to the CourseWizard code at any time.
+	 *
+	 * 2) The external tool links could break if this code is executed from a different account, 
+	 * or if the external tools themselves are modified such that the IDs are no longer valid.
 	 * 
 	 */
-	var DEBUG = (window.location.pathname == "/courses/39");
-	var BASE_COURSE_URL = window.location.pathname; // i.e. /courses/12345
+
 	var POLICY_WIZARD_TOOL_ID = 1509; // Tool ID for account_id=39 
 	var MANAGE_PEOPLE_TOOL_ID = 3958; // Tool ID for account_id=39
 	var BACKGROUND_IMG_URL = "//hpac.harvard.edu/files/hpac/files/022210_stock_jc_047_124407_978454_1.jpg"; // Source: http://hpac.harvard.edu/pages/photos
+	var BASE_COURSE_URL = window.location.pathname; // i.e. /courses/12345
+	var DEBUG = false; // (window.location.pathname == "/courses/39");
 
 	//----- CHANGE #1 -----
 	// REMOVE: "Add Students" item
