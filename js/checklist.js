@@ -6,9 +6,11 @@ require(['jquery'], function($) {
 	 * It's related to the modification to the "Import Content" item on the setup checklist.
 	 */
 	var html = "<p>If you would like to incorporate content from a previous iSite, please contact the Academic Technology Group at <a href=\"mailto:atg@fas.harvard.edu\">atg@fas.harvard.edu</a>.</p>";
-	if (/^\/courses\/\d+\/content_migrations/.test(window.location.pathname)) {
+	var is_content_migration_page = /^\/courses\/\d+\/content_migrations/.test(window.location.pathname);
+	if (is_content_migration_page) {
 		$("#migrationConverterContainer > h1").after(html);
 	}
+	console.log(is_content_migration_page, html);
 });
 
 require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
