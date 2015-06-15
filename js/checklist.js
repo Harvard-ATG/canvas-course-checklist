@@ -27,7 +27,9 @@ require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
 	 * and CourseWizard uses this same reference at render time, so any changes we make here are
 	 * visible to the CourseWizard component.
 	 *
-	 * Note that the external tool links have the tool ID hard coded for the "Harvard College/GSAS"
+	 * NOTE ABOUT EXTERNAL TOOL LINKS:
+	 *
+	 * The external tool links have the tool ID hard coded for the "Harvard College/GSAS"
 	 * account (account_id=39), since it would be too cumbersome to obtain the tool ID
 	 * using the Canvas API. Ideally, these would be provided to the JS as environment
 	 * variables, but since we don't have the ability to modify the server-side controller,
@@ -49,10 +51,17 @@ require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
 	 * 
 	 */
 
+	// Hard-coded external tool IDs
 	var POLICY_WIZARD_TOOL_ID = 1509; // Tool ID for account_id=39 
 	var MANAGE_PEOPLE_TOOL_ID = 3958; // Tool ID for account_id=39
-	var BACKGROUND_IMG_URL = "//hpac.harvard.edu/files/hpac/files/022210_stock_jc_047_124407_978454_1.jpg"; // Source: http://hpac.harvard.edu/pages/photos
-	var BASE_COURSE_URL = window.location.pathname; // i.e. /courses/12345
+	
+	// Background image
+	// Source: http://hpac.harvard.edu/pages/photos
+	//var BACKGROUND_IMG_URL = "//hpac.harvard.edu/files/hpac/files/022210_stock_jc_047_124407_978454_1.jpg"; 
+	var BACKGROUND_IMG_URL = "//harvard-atg.github.io/canvas-course-checklist/img/john_harvard_statue.jpg";
+
+	// Base course URL (i.e. /courses/1234)
+	var BASE_COURSE_URL = window.location.pathname;
 	var DEBUG = false; // (window.location.pathname == "/courses/39");
 
 	//----- CHANGE #1 -----
