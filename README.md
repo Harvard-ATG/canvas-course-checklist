@@ -1,1 +1,1 @@
-See: [http://harvard-atg.github.io/canvas-course-checklist/fas.js](http://harvard-atg.github.io/canvas-course-checklist/fas.js)
+See [README](http://github.com/Harvard-ATG/canvas-course-checklist/blob/gh-pages/README.md)
