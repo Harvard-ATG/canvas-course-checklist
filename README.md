@@ -2,7 +2,7 @@
 
 This is a customized *Setup Checklist* for the **Harvard College/GSAS** account in Canvas. 
 
-When instructors view their unpublished course home apge, a button to access the checklist is prominently displayed:
+When instructors view their unpublished course home page, a button to access the checklist is prominently displayed:
 
 ![Checklist button](http://harvard-atg.github.io/canvas-course-checklist/img/screenshot_canvas_checklist_button.png)
 
