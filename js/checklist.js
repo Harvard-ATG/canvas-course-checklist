@@ -7,10 +7,11 @@ require(['jquery'], function($) {
 	 */
 	var html = "<p>If you would like to incorporate content from a previous iSite, please contact the Academic Technology Group at <a href=\"mailto:atg@fas.harvard.edu\">atg@fas.harvard.edu</a>.</p>";
 	var is_content_migration_page = /^\/courses\/\d+\/content_migrations/.test(window.location.pathname);
+	console.log(is_content_migration_page);
 	if (is_content_migration_page) {
 		$(document).ready(function() {
 			$("#migrationConverterContainer > h1").after(html);
-			console.log(is_content_migration_page, html);
+			console.log($("#migrationConverterContainer > h1")[0], html);
 		});
 	}
 });
@@ -82,7 +83,7 @@ require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
 
 	//----- CHANGE #1 -----
 	// REMOVE: Modify "Import Content" item
-	ListItems[0].text = "If you've been using another course management system, you probably have stuff in there that you're going to want moved over to Canvas. We can walk you through the process of easily migrating your content into Canvas. If you would like to incorporate content from a previous iSite, please contact the Academic Technology Group at atg@fas.harvard.edu";
+	ListItems[0].text = "If you've been using another course management system, you probably have stuff in there that you're going to want moved over to Canvas. We can walk you through the process of easily migrating your content into Canvas. If you would like to incorporate content from a previous iSite, please contact the Academic Technology Group at <a href=\"mailto:atg@fas.harvard.edu\">atg@fas.harvard.edu</a>";
 	
 	//----- CHANGE #2 -----
 	// REMOVE: "Add Students" item
