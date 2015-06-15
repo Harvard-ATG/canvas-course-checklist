@@ -9,10 +9,10 @@ require(['jquery'], function($) {
 	var is_content_migration_page = /^\/courses\/\d+\/content_migrations/.test(window.location.pathname);
 	console.log(is_content_migration_page);
 	if (is_content_migration_page) {
-		$(document).ready(function() {
+		window.setTimeout(function() { 
 			$("#migrationConverterContainer > h1").after(html);
 			console.log($("#migrationConverterContainer > h1")[0], html);
-		});
+		}, 1000);
 	}
 });
 
