@@ -8,9 +8,11 @@ require(['jquery'], function($) {
 	var html = "<p>If you would like to incorporate content from a previous iSite, please contact the Academic Technology Group at <a href=\"mailto:atg@fas.harvard.edu\">atg@fas.harvard.edu</a>.</p>";
 	var is_content_migration_page = /^\/courses\/\d+\/content_migrations/.test(window.location.pathname);
 	if (is_content_migration_page) {
-		$("#migrationConverterContainer > h1").after(html);
+		$(document).ready(function() {
+			$("#migrationConverterContainer > h1").after(html);
+			console.log(is_content_migration_page, html);
+		});
 	}
-	console.log(is_content_migration_page, html);
 });
 
 require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
