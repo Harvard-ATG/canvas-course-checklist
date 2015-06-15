@@ -1,6 +1,14 @@
 # Canvas Course Checklist
 
-This is a customized *Setup Checklist* for canvas. It is only intended to be used on the **Harvard College/GSAS** account, as there are some hard-coded external tool links that will only work for courses under that account.
+This is a customized *Setup Checklist* for the **Harvard College/GSAS** account in Canvas. 
+
+When instructors view their unpublished course home apge, a button to access the checklist is prominently displayed:
+
+![Checklist button](http://harvard-atg.github.io/canvas-course-checklist/img/screenshot_canvas_checklist_button.png)
+
+Clicking on the button opens the checklist (original, unmodified checklist):
+
+![Checklist screen](http://harvard-atg.github.io/canvas-course-checklist/img/screenshot_canvas_checklist_screen.png)
 
 ## Installation
 
@@ -10,4 +18,5 @@ Use the *Global Javascript URL* feature available on the canvas account settings
 
 ## Caveats
 
-This script uses undocumented features of Canvas to customize the the setup checklist, and could therefore break at any time if Canvas makes a change to their "course wizard" code.
+1. The external tool links are hard-coded and will only work for courses under the **Harvard College/GSAS** account.
+2. This script uses undocumented features of Canvas to customize the the setup checklist, and could therefore break at any time if Canvas makes a change to their "course wizard" code. 
