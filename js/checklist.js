@@ -1,10 +1,22 @@
-require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
+require(['jquery'], function($) {
+	/**
+	 * This adds a line of text after the "Import Content" header on the content migration page
+	 * about migrating content from iSites
+	 *
+	 * It's related to the modification to the "Import Content" item on the setup checklist.
+	 */
+	var html = "<p>If you would like to incorporate content from a previous iSite, please contact the Academic Technology Group at <a href=\"mailto:atg@fas.harvard.edu\">atg@fas.harvard.edu</a>.</p>";
+	if (/^\/courses\/\d+\/content_migrations/.test(window.location.pathname)) {
+		$("#migrationConverterContainer > h1").after(html);
+	}
+});
 
+require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
 	/**
 	 * SYNOPSIS:
 	 *
-	 * This module modifies the checklist items that populate the "Setup Checklist" for
-	 * course instructors.
+	 * This module modifies the checklist items data source that populate
+	 * the "Setup Checklist" for course instructors.
 	 *
 	 * DESCRIPTION:
 	 *
@@ -65,10 +77,14 @@ require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
 	var DEBUG = (window.location.pathname == "/courses/39");
 
 	//----- CHANGE #1 -----
+	// REMOVE: Modify "Import Content" item
+	ListItems[0].text = "If you've been using another course management system, you probably have stuff in there that you're going to want moved over to Canvas. We can walk you through the process of easily migrating your content into Canvas. If you would like to incorporate content from a previous iSite, please contact the Academic Technology Group at atg@fas.harvard.edu";
+	
+	//----- CHANGE #2 -----
 	// REMOVE: "Add Students" item
 	ListItems.splice(2, 1);
 	
-	//----- CHANGE #2 -----
+	//----- CHANGE #3 -----
 	// CHANGE: "Add TAs" item text and move up near the top of the list
 	var add_tas = ListItems.splice(6, 1)[0];
 	ListItems.splice(1, 0, add_tas);
@@ -78,7 +94,7 @@ require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
 	add_tas.url = BASE_COURSE_URL + "/external_tools/" + MANAGE_PEOPLE_TOOL_ID;
 	
 
-	//----- CHANGE #3 -----
+	//----- CHANGE #4 -----
 	// INSERT: Academic Integrity Policy tool
 	ListItems.splice(7, 0, {
 		key:'policy_wizard',
@@ -89,7 +105,7 @@ require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
 		iconClass: 'icon-educators'
 	});
 	
-	//----- CHANGE #4 -----
+	//----- CHANGE #5 -----
 	// Modify background image.
 	if (BACKGROUND_IMG_URL) {
 		$("head").append([
