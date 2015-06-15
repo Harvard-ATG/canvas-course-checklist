@@ -11,15 +11,13 @@ require(['jquery'], function($) {
 	var html = "<p>If you would like to incorporate content from a previous iSite, please contact the Academic Technology Group at <a href=\"mailto:atg@fas.harvard.edu\">atg@fas.harvard.edu</a>.</p>";
 	var is_content_migration_page = /^\/courses\/\d+\/content_migrations/.test(window.location.pathname);
 	var poll_for_element = pollForElement("#migrationConverterContainer > h1", 20, 100, function($el) {
-		console.log("success!");
 		$el.after(html);
 	});
 
-	
 	if (is_content_migration_page) {
 		poll_for_element();
 	}
-	
+
 	function pollForElement(el, num_tries, timeout, success) {
 		var callback = function() {
 			var exists = $(el).length != 0;
@@ -100,7 +98,7 @@ require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
 
 	// Base course URL (i.e. /courses/1234)
 	var BASE_COURSE_URL = window.location.pathname;
-	var DEBUG = (window.location.pathname == "/courses/39");
+	var DEBUG = false; // (window.location.pathname == "/courses/39");
 
 	//----- CHANGE #1 -----
 	// REMOVE: Modify "Import Content" item
