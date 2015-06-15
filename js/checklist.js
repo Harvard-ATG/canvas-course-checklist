@@ -22,7 +22,6 @@ require(['jquery'], function($) {
 		var callback = function() {
 			var exists = $(el).length != 0;
 			--num_tries;
-			console.log("callback", exists, num_tries, timeout);
 			if (exists) {
 				success($(el));
 			} else {
