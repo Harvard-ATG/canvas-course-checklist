@@ -7,12 +7,9 @@ require(['jquery'], function($) {
 	 */
 	var html = "<p>If you would like to incorporate content from a previous iSite, please contact the Academic Technology Group at <a href=\"mailto:atg@fas.harvard.edu\">atg@fas.harvard.edu</a>.</p>";
 	var is_content_migration_page = /^\/courses\/\d+\/content_migrations/.test(window.location.pathname);
-	console.log(is_content_migration_page);
+	console.log(is_content_migration_page, window.location.pathname);
 	if (is_content_migration_page) {
-		window.setTimeout(function() { 
-			$("#migrationConverterContainer > h1").after(html);
-			console.log($("#migrationConverterContainer > h1")[0], html);
-		}, 1000);
+		$("#migrationConverterContainer").prepend(html);
 	}
 });
 
