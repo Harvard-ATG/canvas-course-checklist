@@ -62,7 +62,7 @@ require(['jquery', 'jsx/course_wizard/ListItems'], function($, ListItems) {
 
 	// Base course URL (i.e. /courses/1234)
 	var BASE_COURSE_URL = window.location.pathname;
-	var DEBUG = false; // (window.location.pathname == "/courses/39");
+	var DEBUG = (window.location.pathname == "/courses/39");
 
 	//----- CHANGE #1 -----
 	// REMOVE: "Add Students" item
