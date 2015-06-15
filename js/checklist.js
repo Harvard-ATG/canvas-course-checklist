@@ -7,9 +7,29 @@ require(['jquery'], function($) {
 	 */
 	var html = "<p>If you would like to incorporate content from a previous iSite, please contact the Academic Technology Group at <a href=\"mailto:atg@fas.harvard.edu\">atg@fas.harvard.edu</a>.</p>";
 	var is_content_migration_page = /^\/courses\/\d+\/content_migrations/.test(window.location.pathname);
-	console.log(is_content_migration_page, window.location.pathname);
+	var poll_for_element = pollForElement("#migrationConverterContainer > h1", function($el) {
+		console.log("success!");
+		$el.after(html);
+	}, 20, 100);
+
 	if (is_content_migration_page) {
-		$("#migrationConverterContainer").prepend(html);
+		poll_for_element();
+	}
+	
+	function pollForElement(el, success, num_tries, timeout) {
+		var callback = function() {
+			var exists = $(el).length != 0;
+			--num_tries;
+			console.log("callback", exists, num_tries, timeout);
+			if (exists) {
+				success($(el));
+			} else {
+				if (num_tries > 0) {
+					window.setTimeout(callback, timeout)
+				}
+			}
+		};
+		return callback;
 	}
 });
 
