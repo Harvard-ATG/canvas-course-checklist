@@ -1,14 +1,18 @@
 # Canvas Course Checklist
 
-This is a customized *Setup Checklist* for the **Harvard College/GSAS** account in Canvas. 
+This is a customized *Setup Checklist* for the *Harvard College/GSAS* account in Canvas.
 
-When instructors view their unpublished course home page, a button to access the checklist is prominently displayed:
+Course home page button:
 
 ![Checklist button](http://harvard-atg.github.io/canvas-course-checklist/img/screenshot_canvas_checklist_button.png)
 
-Clicking on the button opens the checklist (original, unmodified checklist):
+Original checklist:
 
-![Checklist screen](http://harvard-atg.github.io/canvas-course-checklist/img/screenshot_canvas_checklist_screen.png)
+![Checklist screen original](http://harvard-atg.github.io/canvas-course-checklist/img/screenshot_canvas_checklist_screen.png)
+
+Customized checklist:
+
+![Checklist screen customized](http://harvard-atg.github.io/canvas-course-checklist/img/screenshot_canvas_checklist_screen2.png)
 
 ## Installation
 
