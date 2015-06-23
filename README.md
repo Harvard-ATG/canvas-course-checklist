@@ -4,7 +4,7 @@ This is a customized *Setup Checklist* for the *Harvard College/GSAS* account in
 
 ## Installation
 
-Use the *Global Javascript URL* feature available on the canvas account settings page to point to [js/checklist.js](http://harvard-atg.github.io/canvas-course-checklist/js/checklist.js), or if you have multiple scripts that need to be included, then combine the scripts into one file and use that.
+Use the *Global Javascript URL* and *Global CSS URL* feature on the canvas account settings page to point to [js/checklist.js](http://harvard-atg.github.io/canvas-course-checklist/js/checklist.js) and [css/checklist.css](http://harvard-atg.github.io/canvas-course-checklist/css/checklist.css). If you have multiple scripts/stylesheets that need to be included, then you will need to combine them into one file. How to do that is out of scope for this project.
 
 ![Global Javscript and CSS Includes](http://harvard-atg.github.io/canvas-course-checklist/img/screenshot_canvas_global_js.png)
 
